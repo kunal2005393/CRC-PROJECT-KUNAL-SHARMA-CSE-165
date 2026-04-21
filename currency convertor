@@ -1,1 +1,66 @@
+import java.util.Scanner;
 
+interface CurrencyInt {
+    double DollarToInr(double Dollars, double ExchangeRate);
+    double InrToDollar(double Inr, double ExchangeRate);
+}
+
+class CurrencyClass implements CurrencyInt {
+    public double DollarToInr(double Dollars, double ExchangeRate) {
+        return Dollars * ExchangeRate;
+    }
+    public double InrToDollar(double Inr, double ExchangeRate) {
+        return Inr / ExchangeRate;
+    }
+}
+
+class CurrencyConverter {
+    public static void main(String[] args) {
+        int choice;
+        double ExchangeRate;
+        double dollar;
+        double inr;
+        char ans;
+
+        CurrencyClass cc = new CurrencyClass();
+        Scanner input = new Scanner(System.in);
+
+        do {
+            System.out.println("        MENU        ");
+            System.out.println("--------------------");
+            System.out.println("1. Dollar to Inr");
+            System.out.println("2. Inr to Dollars");
+
+            System.out.println("\nEnter your choice");
+            choice = input.nextInt();
+
+            System.out.println("\nPls enter current exchange rate:");
+            ExchangeRate = input.nextDouble();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter no of Dollars: ");
+                    dollar = input.nextDouble();
+                    inr = cc.DollarToInr(dollar, ExchangeRate);
+                    System.out.println(dollar + " dollars = " + inr + " INR");
+                    break;
+
+                case 2:
+                    System.out.print("Enter no of Rupees: ");
+                    inr = input.nextDouble();
+                    dollar = cc.InrToDollar(inr, ExchangeRate);
+                    System.out.println(inr + " rupees = " + dollar + " Dollars");
+                    break;
+
+                default:
+                    System.out.println("Wrong choice, Try Again.");
+            }
+
+            System.out.println("Do you want to continue:(y/n):");
+            ans = input.next().charAt(0);
+
+        } while (ans == 'y');
+
+        System.out.println("Thank you!");
+    }
+}
